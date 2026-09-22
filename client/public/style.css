@@ -1,0 +1,302 @@
+/* Palette pulled from the Hollow Knight design reference */
+:root {
+  --page-bg: #1f2340;
+  --card-bg: #c2c4d9;
+  --card-bg-hover: #d3d5e6;
+  --card-title: #565173;
+  --card-text: #1f2340;
+  --accent: #b39db0;
+  --accent-hover: #8f7a8c;
+  --panel: rgba(31, 35, 64, 0.55);
+}
+
+/* Override Pico's dark theme variables so its components match the palette */
+[data-theme='dark'] {
+  --pico-font-family: 'Lato', Verdana, sans-serif;
+  --pico-background-color: var(--page-bg);
+  --pico-primary: var(--accent);
+  --pico-primary-background: var(--accent);
+  --pico-primary-hover-background: var(--accent-hover);
+  --pico-primary-border: var(--accent);
+  --pico-primary-hover-border: var(--accent-hover);
+  --pico-primary-inverse: #fff;
+}
+
+body {
+  background-color: var(--page-bg);
+}
+
+/* ---------- Hero banner ---------- */
+body > header {
+  padding: 0;
+}
+
+header .hero {
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 4.5rem 3.5rem 0;
+  background: #0d0f1f;
+  border-bottom: 2px solid #000;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-text,
+.hero-button {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-text {
+  align-self: stretch;
+  width: min(490px, 45%);
+  margin-top: 45px;
+  padding: 3.5rem 2.5rem;
+  background: var(--panel);
+  color: #fff;
+}
+
+.hero-text h1 {
+  color: #fff;
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.hero-text p {
+  color: #fff;
+  font-style: italic;
+  font-size: 1.1rem;
+  margin: 0;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.hero-button {
+  padding: 1rem 1.8rem;
+  border: none;
+  border-radius: 2px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ---------- Boss list (cards) ---------- */
+/* Card internals use px: Pico bumps the root font up to 21px on wide screens,
+   which would otherwise inflate everything and squeeze the text column. */
+.boss-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 40px;
+  max-width: 1200px; /* caps the grid at 3 columns, like the reference */
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.boss-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 36px 28px;
+  background: var(--card-bg);
+  border: 1px solid #000;
+  border-radius: 4px;
+  color: var(--card-text);
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.boss-card:hover,
+.boss-card:focus-visible {
+  transform: translateY(-6px);
+  background: var(--card-bg-hover);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+  text-decoration: none;
+}
+
+.boss-card img {
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+.boss-card:hover img {
+  transform: scale(1.08) rotate(-3deg);
+}
+
+.boss-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.boss-card h3 {
+  margin: 0 0 6px;
+  color: var(--card-title);
+  font-size: 24px;
+  line-height: 1.25;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+}
+
+.boss-card small {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--card-title);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.boss-card p {
+  margin: 0;
+  color: var(--card-text);
+  font-size: 15px;
+  line-height: 1.45;
+  font-style: italic;
+  /* keep cards even: show a short excerpt, full text lives on the detail page */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.load-error {
+  color: #fff;
+}
+
+/* ---------- Boss detail page ---------- */
+#item-content {
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+}
+
+.boss-detail {
+  display: grid;
+  grid-template-columns: minmax(200px, 320px) 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 3rem;
+  background: var(--card-bg);
+  border: 1px solid #000;
+  border-radius: 4px;
+  color: var(--card-text);
+}
+
+.boss-detail img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+}
+
+.boss-detail h2 {
+  color: var(--card-title);
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.boss-detail dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.boss-detail dt {
+  color: var(--card-title);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.boss-detail dd {
+  margin: 0;
+  color: var(--card-text);
+}
+
+.boss-description {
+  color: var(--card-text);
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.back-button {
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ---------- 404 page ---------- */
+.not-found {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  align-items: center;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.not-found img {
+  width: 100%;
+  max-width: 260px;
+  justify-self: center;
+}
+
+.not-found h2,
+.not-found p {
+  color: #fff;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 768px) {
+  header .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 0 1rem 2rem;
+  }
+
+  .hero-text {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
+
+  .boss-grid {
+    grid-template-columns: 1fr;
+    padding-top: 2.5rem;
+  }
+
+  .boss-card {
+    padding: 1.5rem;
+  }
+
+  .boss-card img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .boss-detail,
+  .not-found {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+}
