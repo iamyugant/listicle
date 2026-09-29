@@ -1,27 +1,34 @@
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import itemsRouter from './routes/items.js'
+import bosses from './bosses.js'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const publicDir = path.join(__dirname, 'public')
+const publicDir = path.join(path.dirname(fileURLToPath(import.meta.url)), 'public')
+const page = (name) => path.join(publicDir, name)
 
 const app = express()
 
-// index: false so "/" goes through the route below rather than auto-serving index.html
+// index: false so "/" is handled below instead of being auto-served
 app.use(express.static(publicDir, { index: false }))
-app.use('/bosses', itemsRouter)
 
 app.get('/', (req, res) => {
-  res.status(200).sendFile(path.join(publicDir, 'index.html'))
+  res.sendFile(page('index.html'))
 })
 
-// Anything that didn't match a route above
+app.get('/bosses', (req, res) => {
+  res.json(bosses)
+})
+
+app.get('/bosses/:slug', (req, res) => {
+  const boss = bosses.find(b => b.slug === req.params.slug.toLowerCase())
+  if (!boss) return res.status(404).sendFile(page('404.html'))
+
+  res.sendFile(page('boss.html'))
+})
+
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(publicDir, '404.html'))
+  res.status(404).sendFile(page('404.html'))
 })
 
 const PORT = process.env.PORT || 3001
-app.listen(PORT, () => {
-  console.log(`🚀 Server listening on http://localhost:${PORT}`)
-})
+app.listen(PORT, () => console.log(`🚀 Server listening on http://localhost:${PORT}`))

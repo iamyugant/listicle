@@ -1,4 +1,3 @@
-/* Palette pulled from the Hollow Knight design reference */
 :root {
   --page-bg: #1f2340;
   --card-bg: #c2c4d9;
@@ -10,7 +9,7 @@
   --panel: rgba(31, 35, 64, 0.55);
 }
 
-/* Override Pico's dark theme variables so its components match the palette */
+/* Pico's own variables, so its buttons and links follow the palette above */
 [data-theme='dark'] {
   --pico-font-family: 'Lato', Verdana, sans-serif;
   --pico-background-color: var(--page-bg);
@@ -94,13 +93,13 @@ header .hero {
 }
 
 /* ---------- Boss list (cards) ---------- */
-/* Card internals use px: Pico bumps the root font up to 21px on wide screens,
-   which would otherwise inflate everything and squeeze the text column. */
+/* Card internals stay in px: Pico scales the root font to 21px on wide screens,
+   which inflates rem spacing and squeezes the text column. */
 .boss-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   gap: 40px;
-  max-width: 1200px; /* caps the grid at 3 columns, like the reference */
+  max-width: 1200px; /* caps the grid at 3 columns */
   padding-top: 80px;
   padding-bottom: 80px;
 }
@@ -166,7 +165,7 @@ header .hero {
   font-size: 15px;
   line-height: 1.45;
   font-style: italic;
-  /* keep cards even: show a short excerpt, full text lives on the detail page */
+  /* excerpt only, so cards stay the same height */
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;

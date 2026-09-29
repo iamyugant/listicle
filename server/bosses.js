@@ -1,7 +1,6 @@
-// Every boss shares the same attributes so this can move into a database in Unit 2.
 const sprite = (file) => `https://static.wikia.nocookie.net/hollowknight/images/${file}/revision/latest`
 
-const listData = [
+const bosses = [
   {
     id: 1,
     slug: 'brokenvessel',
@@ -84,4 +83,4 @@ const listData = [
   }
 ]
 
-export default listData
+export default bosses
