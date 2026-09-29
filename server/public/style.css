@@ -1,12 +1,12 @@
 :root {
-  --page-bg: #1f2340;
-  --card-bg: #c2c4d9;
-  --card-bg-hover: #d3d5e6;
-  --card-title: #565173;
-  --card-text: #1f2340;
-  --accent: #b39db0;
-  --accent-hover: #8f7a8c;
-  --panel: rgba(31, 35, 64, 0.55);
+  --page-bg: #011126;
+  --card-bg: #adc5d9;
+  --card-bg-hover: #c9dceb;
+  --card-title: #022859;
+  --card-text: #04182e;
+  --accent: #adc5d9;
+  --accent-hover: #022859;
+  --panel: rgba(1, 17, 38, 0.5);
 }
 
 /* Pico's own variables, so its buttons and links follow the palette above */
@@ -18,11 +18,22 @@
   --pico-primary-hover-background: var(--accent-hover);
   --pico-primary-border: var(--accent);
   --pico-primary-hover-border: var(--accent-hover);
-  --pico-primary-inverse: #fff;
+  --pico-primary-inverse: #000;
 }
 
 body {
   background-color: var(--page-bg);
+}
+
+[role='button'] {
+  border-radius: 2px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+[role='button']:hover {
+  color: #fff;
 }
 
 /* ---------- Hero banner ---------- */
@@ -32,12 +43,12 @@ body > header {
 
 header .hero {
   position: relative;
-  min-height: 400px;
+  min-height: 100vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-end;
-  padding: 0 4.5rem 3.5rem 0;
-  background: #0d0f1f;
+  padding: 0 4% 80px;
+  background: #011126;
   border-bottom: 2px solid #000;
   overflow: hidden;
 }
@@ -51,45 +62,43 @@ header .hero {
   z-index: 0;
 }
 
-.hero-text,
-.hero-button {
+.hero-text {
   position: relative;
   z-index: 1;
-}
-
-.hero-text {
-  align-self: stretch;
-  width: min(490px, 45%);
-  margin-top: 45px;
-  padding: 3.5rem 2.5rem;
+  width: 48%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  padding: 2rem 3rem;
   background: var(--panel);
+  text-align: center;
   color: #fff;
 }
 
 .hero-text h1 {
+  margin: 0;
   color: #fff;
-  font-size: 3.5rem;
+  font-size: 48px;
   font-weight: 900;
-  margin-bottom: 1.5rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
   text-shadow: 2px 2px 4px #000;
 }
 
 .hero-text p {
+  margin: 0;
   color: #fff;
   font-style: italic;
-  font-size: 1.1rem;
-  margin: 0;
+  font-size: 17px;
   text-shadow: 1px 1px 2px #000;
 }
 
 .hero-button {
   padding: 1rem 1.8rem;
   border: none;
-  border-radius: 2px;
-  font-weight: 900;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #fff;
 }
 
 /* ---------- Boss list (cards) ---------- */
@@ -263,20 +272,19 @@ header .hero {
 /* ---------- Small screens ---------- */
 @media (max-width: 768px) {
   header .hero {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
-    padding: 0 1rem 2rem;
+    min-height: 90vh;
+    justify-content: center;
+    padding: 0 1rem 2.5rem;
   }
 
   .hero-text {
     width: 100%;
-    margin-top: 2rem;
+    height: auto;
     padding: 2rem 1.5rem;
   }
 
   .hero-text h1 {
-    font-size: 2.5rem;
+    font-size: 32px;
   }
 
   .boss-grid {
