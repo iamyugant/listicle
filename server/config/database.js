@@ -1,5 +1,10 @@
-import 'dotenv/config'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import dotenv from 'dotenv'
 import pg from 'pg'
+
+// Relative to this file, so the server runs from any working directory
+dotenv.config({ path: path.join(path.dirname(fileURLToPath(import.meta.url)), '../.env') })
 
 const { DATABASE_URL } = process.env
 
